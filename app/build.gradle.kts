@@ -25,6 +25,21 @@ android {
 
     buildFeatures {
         resValues = true
+        buildConfig = true
+    }
+
+    // github: the APK on GitHub releases, which updates itself. play: the Google Play build, which Play updates,
+    // so it has no self-updater and no install permission, and explains the Home button service before it opens.
+    flavorDimensions += "store"
+    productFlavors {
+        create("github") {
+            dimension = "store"
+            buildConfigField("boolean", "PLAY", "false")
+        }
+        create("play") {
+            dimension = "store"
+            buildConfigField("boolean", "PLAY", "true")
+        }
     }
 
     // Release key lives outside the repo; keystore.properties (git-ignored) points at it. Without that file
