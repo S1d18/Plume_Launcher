@@ -7,8 +7,10 @@ import android.content.SharedPreferences
 import android.media.AudioManager
 import android.media.tv.TvContract
 import android.media.tv.TvInputManager
+import android.os.Build
 import android.provider.Settings
 import android.view.KeyEvent
+import android.widget.Toast
 
 /**
  * Remote key remapping. Plume's Home key service already sees every key before any app does, so a key mapped
@@ -17,6 +19,11 @@ import android.view.KeyEvent
  * Kept in one preference string ("home"/"keymap", a line per key) and in memory only once a key is pressed.
  */
 object Remap {
+    /** Fire OS sends the passthrough intent to Amazon's Live TV app and keeps its own input switcher to Amazon apps (#91). */
+    val FIRE_OS = Build.MANUFACTURER.equals("Amazon", ignoreCase = true)
+
+    fun noInputs(c: Context) = Toast.makeText(c, c.getString(R.string.fire_os_no_inputs), Toast.LENGTH_LONG).show()
+
     class Entry(val short: String, val long: String)
 
     /** Set while the settings page waits for a key to change. */
@@ -102,7 +109,7 @@ object Remap {
             when (action.substringBefore(':')) {
                 "app" -> (s.packageManager.getLeanbackLaunchIntentForPackage(arg) ?: s.packageManager.getLaunchIntentForPackage(arg))
                     ?.let { s.startActivity(it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
-                "hdmi" -> s.startActivity(Intent(Intent.ACTION_VIEW, TvContract.buildChannelUriForPassthroughInput(arg))
+                "hdmi" -> if (FIRE_OS) noInputs(s) else s.startActivity(Intent(Intent.ACTION_VIEW, TvContract.buildChannelUriForPassthroughInput(arg))
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
                 "media" -> MEDIA[arg]?.let { (code, _) ->
                     val audio = s.getSystemService(Context.AUDIO_SERVICE) as AudioManager

@@ -314,7 +314,7 @@ class MainActivity : Activity() {
         // Top bar: network, All apps, Android settings, launcher settings. Round, lit on focus.
         for ((id, action) in listOf<Pair<Int, () -> Unit>>(
             R.id.wifi to { unlock { openSettings(Settings.ACTION_WIFI_SETTINGS) } },
-            R.id.sourcesButton to { showSources(findViewById(R.id.sourcesButton)) },
+            R.id.sourcesButton to { if (Remap.FIRE_OS) Remap.noInputs(this) else showSources(findViewById(R.id.sourcesButton)) },
             R.id.allAppsButton to { openAllApps() },
             R.id.systemSettings to { unlock { openSettings(Settings.ACTION_SETTINGS) } },
             R.id.launcherSettings to { unlock { openLauncherSettings() } },
@@ -1039,7 +1039,9 @@ class MainActivity : Activity() {
         // Every input counts, with or without a signal: sortedApps() has only the ones pinned to the row.
         showPage(getString(R.string.key_open_app), (sources + sortedApps().filter { !it.pkg.startsWith(HDMI) }).map { a ->
             val action = if (a.pkg.startsWith(HDMI)) "hdmi:" + a.pkg.removePrefix(HDMI) else "app:" + a.pkg
-            page(a.label, if (action == now) CHOSEN else "") { setAction(id, hold, action) }
+            page(a.label, if (action == now) CHOSEN else "") {
+                if (Remap.FIRE_OS && action.startsWith("hdmi:")) Remap.noInputs(this) else setAction(id, hold, action)
+            }
         }) { pickAction(id, hold) }
     }
 
@@ -2383,6 +2385,7 @@ class MainActivity : Activity() {
     }
 
     private fun launch(a: App) {
+        if (Remap.FIRE_OS && a.pkg.startsWith(HDMI)) return Remap.noInputs(this)
         prefs.edit().putInt("n_" + a.pkg, prefs.getInt("n_" + a.pkg, 0) + 1).putLong("t_" + a.pkg, System.currentTimeMillis()).apply()
         if (prefs.getString("sort", "manual") == "usage") appsDirty = true
         try {

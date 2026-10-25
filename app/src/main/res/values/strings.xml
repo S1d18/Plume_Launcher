@@ -232,4 +232,5 @@
         <item quantity="one">%d key</item>
         <item quantity="other">%d keys</item>
     </plurals>
+    <string name="fire_os_no_inputs">Fire TV doesn't let apps switch inputs. Hold Home and pick Inputs.</string>
 </resources>
