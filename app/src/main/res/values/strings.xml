@@ -156,6 +156,11 @@
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
     <string name="theme_auto">Auto</string>
+    <string name="auto_note_sun">Auto is light from sunrise to sunset in %1$s. Today: %2$s to %3$s.</string>
+    <string name="auto_note_up">Auto stays light today: the sun does not set in %1$s.</string>
+    <string name="auto_note_down">Auto stays dark today: the sun does not rise in %1$s.</string>
+    <string name="auto_note_clock">Auto is light from %1$s to %2$s. Set a location in Clock &amp; weather to follow sunrise and sunset.</string>
+    <string name="your_area">your area</string>
     <!-- Season and episode on a Continue Watching card, for example "S1 E3". -->
     <string name="season_episode">S%1$s E%2$s</string>
     <!-- Home setup popups -->

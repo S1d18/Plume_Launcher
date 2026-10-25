@@ -16,6 +16,7 @@ Put changes that are not released under `## Unreleased`. Rename that heading to 
 
 ## Unreleased
 
+- **Auto follows the sun.** With **Theme** set to **Auto**, Plume changes to dark at sunset. It changes to light at sunrise. Plume calculates the times on the TV. It uses the location in **Plume settings → Clock & weather → Location**. Plume keeps this location when you turn off the weather. If Plume has no location, it uses 7:00 and 19:00 as before. **Plume settings → Wallpaper & theme** shows today's times.
 - **Hide the Shows row.** Select **Plume settings → Shows row → Show row**. Choose **On Down** to show only the apps and the wallpaper. Press Down to slide the row in, and Up to hide it. Choose **Never** to remove the row. **Apps when row hides** keeps the apps in place or moves them down.
 - **Text that fits the wallpaper.** The clock, the date, the weather and the Continue watching text change to white or dark to match the wallpaper behind them. You can read them on a bright photo and on a dark photo.
 - **Less memory.** Plume keeps the wallpaper and the app icons once instead of twice. On a test TV, it uses about 11 MB less.

@@ -59,6 +59,7 @@ import android.provider.Settings
 import android.text.InputType
 import android.text.SpannableString
 import android.text.TextUtils
+import android.text.format.DateFormat
 import android.text.style.BulletSpan
 import android.util.LruCache
 import android.view.Gravity
@@ -87,15 +88,24 @@ import java.net.URLEncoder
 import java.security.MessageDigest
 import java.security.SecureRandom
 import java.util.Calendar
+import java.util.Date
 import java.util.concurrent.Executors
 import org.json.JSONObject
 
 /** Light/dark from the launcher's theme setting; shared with the Gallery screensaver. */
 internal fun prefersDark(prefs: SharedPreferences) = when (prefs.getString("theme", "light")) {
     "dark" -> true
-    "auto" -> Calendar.getInstance().get(Calendar.HOUR_OF_DAY) !in 7..18
+    "auto" -> autoDark(sunPlace(prefs), System.currentTimeMillis(), Calendar.getInstance().get(Calendar.HOUR_OF_DAY))
     else -> false
 }
+
+/** The weather's location (found or chosen), kept on the TV: Auto follows the sun there. Null until there is one. */
+internal fun sunPlace(prefs: SharedPreferences) =
+    if (prefs.contains("geo_lat")) prefs.getFloat("geo_lat", 0f).toDouble() to prefs.getFloat("geo_lon", 0f).toDouble() else null
+
+/** Dark from sunset to sunrise at [place]; with no place, from 19:00 to 7:00 as before. */
+internal fun autoDark(place: Pair<Double, Double>?, now: Long, hour: Int) =
+    if (place == null) hour !in 7..18 else Sun.dark(place.first, place.second, now)
 
 /** "1.10" > "1.9" > "1.2.1" > "1.2": compared number by number, missing parts count as 0. */
 internal fun newerVersion(a: String, b: String): Boolean {
@@ -385,7 +395,7 @@ class MainActivity : Activity() {
         ui.post { updateBadge() } // after layout, so the icon has its size
     }
 
-    /** Auto theme flips at 7:00 and 19:00 even while the home screen just sits there. */
+    /** Auto theme flips at sunrise and sunset (or 7:00 and 19:00) even while the home screen just sits there. */
     private val themeTick = object : Runnable {
         override fun run() {
             if (wantDark() != dark) recreate() else ui.postDelayed(this, 60_000L)
@@ -1386,7 +1396,12 @@ class MainActivity : Activity() {
         if (section != null) {
             lastSettings = section.first
             val keys = section.third
-            val note = if (section.first != R.string.section_lock) null else label(getString(R.string.lock_note), 15f).apply {
+            val noteText = when {
+                section.first == R.string.section_lock -> getString(R.string.lock_note)
+                section.first == R.string.section_appearance && theme == "auto" -> autoNote()
+                else -> null
+            }
+            val note = if (noteText == null) null else label(noteText, 15f).apply {
                 maxLines = 5
                 setPadding(dp(14), dp(4), dp(14), dp(10))
             }
@@ -1407,6 +1422,22 @@ class MainActivity : Activity() {
     }
 
     private var lastSettings = 0 // section used last, focused when settings open again
+
+    /** What Auto does here today, under Wallpaper & theme. Times in the TV's 12- or 24-hour format. */
+    private fun autoNote(): String {
+        val time = DateFormat.getTimeFormat(this)
+        val place = sunPlace(prefs) ?: return getString(R.string.auto_note_clock,
+            time.format(Calendar.getInstance().apply { set(Calendar.HOUR_OF_DAY, 7); set(Calendar.MINUTE, 0) }.time),
+            time.format(Calendar.getInstance().apply { set(Calendar.HOUR_OF_DAY, 19); set(Calendar.MINUTE, 0) }.time))
+        val city = prefs.getString("geo_city", null).orEmpty().ifEmpty { getString(R.string.your_area) }
+        // Today's noon, not now: just after midnight, now's nearest sun day is still yesterday's.
+        val noon = Calendar.getInstance().apply { set(Calendar.HOUR_OF_DAY, 12); set(Calendar.MINUTE, 0) }.timeInMillis
+        return when (val d = Sun.day(place.first, place.second, noon)) {
+            Sun.Day.AlwaysUp -> getString(R.string.auto_note_up, city)
+            Sun.Day.AlwaysDown -> getString(R.string.auto_note_down, city)
+            is Sun.Day.Times -> getString(R.string.auto_note_sun, city, time.format(Date(d.rise)), time.format(Date(d.set)))
+        }
+    }
 
     private fun <T> List<T>.step(current: T, dir: Int) = this[((indexOf(current) + dir) % size + size) % size]
 
