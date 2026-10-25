@@ -20,6 +20,13 @@ class HdmiInputsTest {
         assertFalse(isAudioDevice("PlayStation 5"))
     }
 
+    @Test fun fireOsPortIsTheHardwareNumber() {
+        assertEquals(2, Remap.hardwareNumber("com.mediatek.tvinput/.hdmi.HDMIInputService/HW2"))
+        assertEquals(10, Remap.hardwareNumber("com.mediatek.tvinput/.hdmi.HDMIInputService/HW10"))
+        assertEquals(null, Remap.hardwareNumber("com.example.tuner/.TunerService"))
+        assertEquals(null, Remap.hardwareNumber("com.example/.Service/HW2/HDMI2050")) // a CEC device's id, not its port's
+    }
+
     @Test fun row() {
         assertTrue(inRow("com.app", emptySet()))
         assertFalse(inRow("com.app", setOf("com.app")))

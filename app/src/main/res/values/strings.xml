@@ -280,4 +280,5 @@
         <item quantity="one">%d key</item>
         <item quantity="other">%d keys</item>
     </plurals>
+    <string name="fire_os_no_input">Fire TV didn\'t let Plume switch to this input. Hold Home and pick Inputs.</string>
 </resources>

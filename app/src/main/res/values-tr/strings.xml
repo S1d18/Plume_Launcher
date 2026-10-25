@@ -192,4 +192,5 @@
     <string name="input_added">Satıra eklendi.</string>
     <string name="input_removed">Satırdan kaldırıldı.</string>
     <string name="sources_hint">Bir girişi satıra sabitlemek için OK tuşunu basılı tutun.</string>
+    <string name="fire_os_no_input">Fire TV, Plume\'un bu girişe geçmesine izin vermedi. Ana Ekran tuşunu basılı tutup Girişler\'i seçin.</string>
 </resources>

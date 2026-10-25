@@ -236,4 +236,5 @@
     <string name="watch_next">À suivre (Android TV)</string>
     <string name="bottom_row">Rangée du bas</string>
     <string name="automatic">Automatique</string>
+    <string name="fire_os_no_input">Fire TV n\'a pas laissé Plume changer d\'entrée. Maintenez Accueil et choisissez Entrées.</string>
 </resources>

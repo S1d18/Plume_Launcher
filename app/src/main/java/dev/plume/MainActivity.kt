@@ -2884,7 +2884,7 @@ class MainActivity : Activity() {
         prefs.edit().putInt("n_" + a.pkg, prefs.getInt("n_" + a.pkg, 0) + 1).putLong("t_" + a.pkg, System.currentTimeMillis()).apply()
         if (prefs.getString("sort", "manual") == "usage") appsDirty = true
         try {
-            startActivity(a.launch)
+            if (a.pkg.startsWith(HDMI)) Remap.openInput(this, a.pkg.removePrefix(HDMI)) else startActivity(a.launch)
         } catch (e: Exception) {
             packageManager.getLeanbackLaunchIntentForPackage(a.pkg)?.let { startActivity(it) }
         }
