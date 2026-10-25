@@ -161,6 +161,31 @@
     <string name="auto_note_down">Auto stays dark today: the sun does not rise in %1$s.</string>
     <string name="auto_note_clock">Auto is light from %1$s to %2$s. Set a location in Clock &amp; weather to follow sunrise and sunset.</string>
     <string name="your_area">your area</string>
+    <string name="help_appearance">Light or dark, and the picture behind your apps.</string>
+    <string name="help_clock_weather">The weather under the clock, and the place it is for.</string>
+    <string name="help_apps_row">Which apps are in the row, their order and how they look.</string>
+    <string name="help_shows_row">The row under your apps: Continue Watching and the channels your apps add.</string>
+    <string name="help_screensaver">What the TV shows when nobody uses it for a while.</string>
+    <string name="help_remote_home">Make Home open Plume, and change what the buttons on your remote do.</string>
+    <string name="help_lock">A PIN that stops other people from changing your home screen.</string>
+    <string name="help_updates">Plume checks for a new version once a day. Install it here.</string>
+    <string name="help_finish_setup">Home still opens the TV\'s own home screen. Set it to open Plume.</string>
+    <string name="help_photo_fade">Makes the top of your own photos darker, so the clock and the icons stay easy to read.</string>
+    <string name="help_location">For the weather, and for sunrise and sunset in Auto. Automatic finds it from your internet address.</string>
+    <string name="help_rearrange">Move the apps in the row. You can also hold OK on an app.</string>
+    <string name="help_choose_apps">Choose the apps in the row. The others stay in All apps.</string>
+    <string name="help_order">Manual keeps your order. Most used puts the apps you open most at the start.</string>
+    <string name="help_icon_style">Press ‹ › to try each style. The row changes while you press.</string>
+    <string name="help_apps_when_hidden">When the shows row hides, the apps stay in place or move down.</string>
+    <string name="help_row_name">The name above the row. Automatic uses the name your apps give it.</string>
+    <string name="help_from_apps">Choose the apps that can add shows to this row.</string>
+    <string name="help_channels">Turn on or off the channels that apps add, like Recommended.</string>
+    <string name="help_hidden_shows">Shows you hid from the row. Press OK to show all of them again.</string>
+    <string name="help_start_after">Opens the Android settings where you set how long the TV waits.</string>
+    <string name="help_home_button">Home opens Plume. Hold Home to open the TV\'s own dashboard.</string>
+    <string name="help_default_launcher">On Android TV, Plume can be the home screen. Google TV keeps its own, so use the Home button.</string>
+    <string name="help_run_setup">Go through the Home button setup again.</string>
+    <string name="help_remote_keys">Change what a button on your remote does when you press it or hold it.</string>
     <!-- Season and episode on a Continue Watching card, for example "S1 E3". -->
     <string name="season_episode">S%1$s E%2$s</string>
     <!-- Home setup popups -->

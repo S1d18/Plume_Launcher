@@ -275,7 +275,7 @@
 
         <LinearLayout
             android:id="@+id/settingsPanel"
-            android:layout_width="380dp"
+            android:layout_width="400dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:orientation="vertical"
@@ -283,6 +283,15 @@
             android:paddingTop="40dp"
             android:paddingEnd="48dp"
             android:paddingBottom="27dp">
+
+            <!-- "Plume settings ›" above a section's title, so you know where Back goes. -->
+            <TextView
+                android:id="@+id/settingsCrumb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="14dp"
+                android:textSize="13sp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/settingsTitle"
@@ -307,6 +316,19 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
             </ScrollView>
+
+            <!-- What the focused row does; empty for rows that need no explaining, but always 3 lines tall. -->
+            <TextView
+                android:id="@+id/settingsHelp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:lineSpacingMultiplier="1.15"
+                android:maxLines="3"
+                android:minLines="3"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textSize="13sp" />
         </LinearLayout>
     </FrameLayout>
 </FrameLayout>

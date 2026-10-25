@@ -16,6 +16,7 @@ Put changes that are not released under `## Unreleased`. Rename that heading to 
 
 ## Unreleased
 
+- **Clearer Plume settings.** Each section has an icon. Under its name, each section shows its settings. Settings with two or three choices show all of them. **Theme** shows a sun for **Light**, a moon for **Dark** and a half circle for **Auto**. **Light wallpaper** and **Dark wallpaper** show as small pictures. A line at the bottom tells what the selected setting does.
 - **Auto follows the sun.** With **Theme** set to **Auto**, Plume changes to dark at sunset. It changes to light at sunrise. Plume calculates the times on the TV. It uses the location in **Plume settings → Clock & weather → Location**. Plume keeps this location when you turn off the weather. If Plume has no location, it uses 7:00 and 19:00 as before. **Plume settings → Wallpaper & theme** shows today's times.
 - **Hide the Shows row.** Select **Plume settings → Shows row → Show row**. Choose **On Down** to show only the apps and the wallpaper. Press Down to slide the row in, and Up to hide it. Choose **Never** to remove the row. **Apps when row hides** keeps the apps in place or moves them down.
 - **Text that fits the wallpaper.** The clock, the date, the weather and the Continue watching text change to white or dark to match the wallpaper behind them. You can read them on a bright photo and on a dark photo.

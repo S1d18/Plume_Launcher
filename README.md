@@ -214,7 +214,7 @@ Bug reports, design ideas, translations and pull requests are welcome. Plume sta
   - Martin Johnson Heade: *Thunder Storm on Narragansett Bay*
 - **Wallpapers:** "Canada" by Thomas Curryer, via [Unsplash](https://unsplash.com/@tawc20) (CC0)
 - **App logos:** [Simple Icons](https://simpleicons.org) (CC0). All trademarks belong to their respective owners.
-- **HDMI input icons:** [Material Symbols](https://fonts.google.com/icons) by Google (Apache 2.0)
+- **HDMI input and settings icons:** [Material Symbols](https://fonts.google.com/icons) by Google (Apache 2.0)
 
 ## License
 
