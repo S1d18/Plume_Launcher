@@ -17,10 +17,10 @@ Put changes that are not released under `## Unreleased`. Rename that heading to 
 ## Unreleased
 
 ### Design
-- **Glass.** Plume blurs the wallpaper behind the tiles, menus and cards, like frosted glass. Turn it on in **Plume settings → Appearance → Glass**.
-- **A new Plume settings.** Each section has an icon and shows its settings. While you change a setting, the part of the home screen it changes stays bright.
-- **Banner icons.** The apps row can show each app's own picture, as on Apple TV. Select **Plume settings → Apps row → Icon style**.
-- **Hide the Shows row.** Show only your apps and wallpaper. Press Down to slide the row in. Select **Plume settings → Shows row → Show row**.
+- **Glass.** A frosted-glass blur behind the tiles and menus. Plume blurs the wallpaper behind the tiles, menus, cards and the settings panel. Turn it on in **Plume settings → Appearance → Glass**.
+- **A new Plume settings.** Each section has an icon and a live preview. Under its name, each section shows its settings. While you change a setting, the part of the home screen it changes stays bright.
+- **Banner icons.** Each app shows its own picture, as on Apple TV. An app with no banner gets its own colour behind a white mark. Select **Plume settings → Apps row → Icon style**.
+- **Hide the Shows row.** Show only your apps and wallpaper, and press Down for your shows. Press Up to hide the row again. Select **Plume settings → Shows row → Show row**.
 - **Auto follows the sun.** With **Theme** set to **Auto**, Plume changes to dark at sunset and to light at sunrise.
 - **Text that fits the wallpaper.** The clock, the weather and the Continue watching text change to white or dark to match your photo.
 - **Set how strong the fades are.** Select **Plume settings → Appearance → Top fade** or **Bottom fade**. Choose from 0% to 100%.
