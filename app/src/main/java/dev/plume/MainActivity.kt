@@ -934,8 +934,8 @@ class MainActivity : Activity() {
     private fun currentWallpaper(forDark: Boolean = dark) =
         prefs.getString(if (forDark) "wp_dark" else "wp_light", null) ?: defaultWallpaper(forDark)
 
-    /** Glass: the tiles are see-through over a blur of the wallpaper (a setting, off by default). */
-    private fun glassOn() = prefs.getBoolean("glass", false)
+    /** Glass: the tiles are see-through over a blur of the wallpaper (a setting, on by default since 1.6). */
+    private fun glassOn() = prefs.getBoolean("glass", true)
 
     /** Glass needs a picture to blur: with a plain background the tiles stay as they are. */
     private fun glassActive() = glassOn() && !currentWallpaper().startsWith("plain:")

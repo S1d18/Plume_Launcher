@@ -17,7 +17,7 @@ Put changes that are not released under `## Unreleased`. Rename that heading to 
 ## Unreleased
 
 ### Design
-- **Glass.** A frosted-glass blur behind the tiles and menus. Plume blurs the wallpaper behind the tiles, menus, cards and the settings panel. Turn it on in **Plume settings → Appearance → Glass**.
+- **Glass.** A frosted-glass blur behind the tiles and menus. Plume blurs the wallpaper behind the tiles, menus, cards and the settings panel. Glass is on after the update. To turn it off, select **Plume settings → Appearance → Glass**.
 - **A new Plume settings.** Each section has an icon and a live preview. Under its name, each section shows its settings. While you change a setting, the part of the home screen it changes stays bright.
 - **Banner icons.** Each app shows its own picture, as on Apple TV. An app with no banner gets its own colour behind a white mark. Select **Plume settings → Apps row → Icon style**.
 - **Hide the Shows row.** Show only your apps and wallpaper, and press Down for your shows. Press Up to hide the row again. Select **Plume settings → Shows row → Show row**.
