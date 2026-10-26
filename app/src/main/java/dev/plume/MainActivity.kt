@@ -699,7 +699,7 @@ class MainActivity : Activity() {
     }
 
     /**
-     * Once after an update: the first three CHANGELOG.md lines of this version, so put the best ones first.
+     * Once after an update: the first four CHANGELOG.md lines of this version, so put the best ones first.
      * Closing it counts as reading the notes, which clears the dot on the Plume settings icon.
      */
     private fun whatsNewCard() {
@@ -707,7 +707,7 @@ class MainActivity : Activity() {
         updateBadge()
         val notes = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            getString(R.string.whats_new).split('\n').take(3).forEach {
+            getString(R.string.whats_new).split('\n').take(4).forEach {
                 addView(label("", 15f).apply {
                     text = SpannableString(it).apply { setSpan(BulletSpan(dp(10), fg), 0, it.length, 0) }
                     maxLines = Int.MAX_VALUE
