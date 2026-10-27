@@ -40,6 +40,7 @@ android {
         }
         create("play") {
             dimension = "store"
+            versionCode = 10
             buildConfigField("boolean", "PLAY", "true")
         }
     }
