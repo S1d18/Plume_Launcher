@@ -196,6 +196,8 @@ internal fun hdmiIcon(name: String, named: Boolean): String {
         "xbox" in n -> "xbox"
         "nintendo" in n || "switch" in n -> "nintendoswitch"
         "apple tv" in n || "appletv" in n -> "appletv"
+        "shield" in n -> "nvidia"
+        "chromecast" in n || "google tv" in n -> "chromecast"
         SET_TOP_WORDS.any { it in n } -> "settop"
         named -> "playback"
         else -> "hdmi"
@@ -4105,6 +4107,8 @@ class MainActivity : Activity() {
             "xbox" to R.drawable.logo_xbox,
             "nintendoswitch" to R.drawable.logo_nintendoswitch,
             "appletv" to R.drawable.logo_appletv,
+            "nvidia" to R.drawable.logo_nvidia,
+            "chromecast" to R.drawable.logo_chromecast,
             "settop" to R.drawable.ic_settop,
             "playback" to R.drawable.ic_playback,
             "hdmi" to R.drawable.ic_hdmi,
