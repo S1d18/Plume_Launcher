@@ -1,6 +1,7 @@
 package dev.plume
 
 import android.accessibilityservice.AccessibilityService
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -9,6 +10,7 @@ import android.media.tv.TvContract
 import android.media.tv.TvInputManager
 import android.provider.Settings
 import android.view.KeyEvent
+import android.widget.Toast
 
 /**
  * Remote key remapping. Plume's Home key service already sees every key before any app does, so a key mapped
@@ -19,8 +21,12 @@ import android.view.KeyEvent
 object Remap {
     class Entry(val short: String, val long: String)
 
-    /** Set while the settings page waits for a key to change. */
+    /** Set while the settings page waits for a key to change; the service must see keys meanwhile. */
     var learn: ((KeyEvent) -> Unit)? = null
+        set(value) {
+            field = value
+            HomeOverride.running?.applyKeyFilter()
+        }
 
     /** The key whose press was just taken to be learned: its repeats and its release are swallowed too. */
     var pending: String? = null
@@ -88,12 +94,39 @@ object Remap {
     }
 
     /** Saves a key's actions; a key left with none is forgotten and goes back to its usual job. */
-    fun put(c: Context, id: String, short: String, long: String) = put(store(c), id, short, long)
+    fun put(c: Context, id: String, short: String, long: String) {
+        put(store(c), id, short, long)
+        HomeOverride.running?.applyKeyFilter()
+    }
 
     internal fun put(p: SharedPreferences, id: String, short: String, long: String) {
         val m = all(p)
         if (short.isEmpty() && long.isEmpty()) m.remove(id) else m[id] = Entry(short, long)
         p.edit().putString("keymap", m.entries.joinToString("\n") { "${it.key}\t${it.value.short}\t${it.value.long}" }).apply()
+    }
+
+    private val KAMINO = ComponentName("com.amazon.tv.inputpreference.service", "com.amazon.tv.inputpreference.service.KaminoInputSwitchService")
+
+    /** The hardware number at the end of a TV input id ("…/HW2"): Fire OS's input switch takes it as the port, HW2 being HDMI 1. */
+    internal fun hardwareNumber(id: String) = Regex("/HW(\\d+)$").find(id)?.groupValues?.get(1)?.toInt()
+
+    /**
+     * Opens an HDMI input, for the tiles and for keys alike. Fire OS hands the standard passthrough request to Amazon's
+     * Live TV app, which opens the wrong screen (#91), so there the input goes through Amazon's own input switch, as its
+     * home screen does. Some Fire OS builds keep that switch to Amazon's apps: then a toast says how to switch by hand.
+     */
+    fun openInput(c: Context, id: String) {
+        if (!c.packageManager.hasSystemFeature("amazon.hardware.fire_tv")) {
+            c.startActivity(Intent(Intent.ACTION_VIEW, TvContract.buildChannelUriForPassthroughInput(id)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            return
+        }
+        val port = hardwareNumber(id)
+        val started = port != null && try {
+            c.startService(Intent().setComponent(KAMINO).putExtra("inputType", port)) != null
+        } catch (e: Exception) {
+            false // not exported to other apps on this build, or Android refused a start from the background
+        }
+        if (!started) Toast.makeText(c, R.string.fire_os_no_input, Toast.LENGTH_LONG).show()
     }
 
     fun run(s: AccessibilityService, action: String) {
@@ -102,8 +135,7 @@ object Remap {
             when (action.substringBefore(':')) {
                 "app" -> (s.packageManager.getLeanbackLaunchIntentForPackage(arg) ?: s.packageManager.getLaunchIntentForPackage(arg))
                     ?.let { s.startActivity(it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
-                "hdmi" -> s.startActivity(Intent(Intent.ACTION_VIEW, TvContract.buildChannelUriForPassthroughInput(arg))
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                "hdmi" -> openInput(s, arg)
                 "media" -> MEDIA[arg]?.let { (code, _) ->
                     val audio = s.getSystemService(Context.AUDIO_SERVICE) as AudioManager
                     audio.dispatchMediaKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, code))

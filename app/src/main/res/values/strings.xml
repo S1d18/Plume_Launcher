@@ -48,7 +48,9 @@
     <string name="done">Done</string>
     <string name="edit_apps_row">Rearrange apps</string>
     <string name="theme">Theme</string>
-    <string name="photo_fade">Photo fade</string>
+    <string name="fade_top">Top fade</string>
+    <string name="fade_bottom">Bottom fade</string>
+    <string name="glass">Glass</string>
     <string name="sort_apps">Order</string>
     <string name="manual">Manual</string>
     <string name="most_used">Most used</string>
@@ -64,7 +66,10 @@
     <string name="banner">Banner</string>
     <string name="banner_mono">Monochrome banner</string>
     <string name="restore_hidden">Hidden shows</string>
-    <string name="show_again">Show %1$d again</string>
+    <plurals name="show_again">
+        <item quantity="one">Show %d again</item>
+        <item quantity="other">Show %d again</item>
+    </plurals>
     <string name="none_hidden">None hidden</string>
     <string name="cw_apps">From apps</string>
     <string name="cw_channels">Channels</string>
@@ -81,6 +86,7 @@
     <string name="test_screensaver">Preview</string>
     <string name="screensaver_timing">Start after</string>
     <string name="home_button">Home button</string>
+    <string name="smooth_volume">Smooth volume</string>
     <string name="default_launcher">Default launcher</string>
     <string name="plume_press_change">Plume: press to change</string>
     <string name="press_to_set">Press to set</string>
@@ -173,13 +179,15 @@
     <string name="a11y_disclosure_body">Plume uses an Android accessibility service for one job: to open Plume when you press Home, and to do what you set for your remote keys. It does not read what is on the screen, and it does not collect or send any data.</string>
     <string name="a11y_agree">Agree and continue</string>
     <string name="help_finish_setup">Home still opens the TV\'s own home screen. Set it to open Plume.</string>
-    <string name="help_photo_fade">Makes the top of your own photos darker, so the clock and the icons stay easy to read.</string>
+    <string name="help_fade_top">Makes the top of your own photos darker, so the clock and the icons stay easy to read. Press Left or Right to change it.</string>
+    <string name="help_fade_bottom">Fades the bottom of your own photos into the background, behind the apps and the Shows row. Press Left or Right to change it.</string>
     <string name="help_location">For the weather, and for sunrise and sunset in Auto. Automatic finds it from your internet address.</string>
     <string name="help_rearrange">Move the apps in the row. You can also hold OK on an app.</string>
     <string name="help_choose_apps">Choose the apps in the row. The others stay in All apps.</string>
     <string name="help_order">Manual keeps your order. Most used puts the apps you open most at the start.</string>
-    <string name="help_icon_style">Press ◀ ▶ to try each style. The row changes while you press.</string>
+    <string name="help_icon_style">Press ‹ › to try each style. The row changes while you press.</string>
     <string name="help_apps_when_hidden">When the shows row hides, the apps stay in place or move down.</string>
+    <string name="help_show_icons">The small app icon on each card. Colour shows it in the app\'s own colour.</string>
     <string name="help_row_name">The name above the row. Automatic uses the name your apps give it.</string>
     <string name="help_from_apps">Choose the apps that can add shows to this row.</string>
     <string name="help_channels">Turn on or off the channels that apps add, like Recommended.</string>
@@ -188,13 +196,14 @@
     <string name="help_home_button">Home opens Plume. Hold Home to open the TV\'s own dashboard.</string>
     <string name="help_default_launcher">On Android TV, Plume can be the home screen. Google TV keeps its own, so use the Home button.</string>
     <string name="help_run_setup">Go through the Home button setup again.</string>
+    <string name="help_smooth_volume">Holding Volume keeps changing it. Home then shows Google TV for about a second before Plume opens. Off while remote keys are set.</string>
     <string name="help_remote_keys">Change what a button on your remote does when you press it or hold it.</string>
     <!-- Season and episode on a Continue Watching card, for example "S1 E3". -->
     <string name="season_episode">S%1$s E%2$s</string>
     <!-- Home setup popups -->
     <string name="setup_home">Run setup again</string>
     <string name="preview_home_setup">Preview Home setup popups</string>
-    <string name="setup_step">Step %1$d of 3</string>
+    <string name="setup_step">Step %1$d of %2$d</string>
     <string name="setup_role_title">Make Plume your home screen</string>
     <string name="setup_role_body">Android will ask which app to use as your home screen. Choose Plume.</string>
     <string name="setup_test_title">Press Home on your remote</string>
@@ -211,6 +220,10 @@
     <string name="setup_not_now">Not now</string>
     <string name="setup_skip_check">Skip this check</string>
     <string name="setup_open_accessibility">Open Accessibility</string>
+    <string name="setup_restricted_title">Allow Plume\'s Home button</string>
+    <string name="setup_restricted_body">This TV greys out the switch for apps installed outside the Play Store. In App info, select \"Allow restricted settings\". On some TVs it is under the ⋮ menu. Then press Back to come back here.</string>
+    <string name="setup_open_app_info">Open App info</string>
+    <string name="setup_no_menu">I can\'t find it</string>
     <string name="setup_try_again">Try again</string>
     <string name="setup_close">Close</string>
     <string name="setup_done">Done</string>
@@ -223,6 +236,7 @@
     <string name="show_row">Show row</string>
     <string name="on_down">On Down</string>
     <string name="apps_when_hidden">Apps when row hides</string>
+    <string name="show_icons">Icons</string>
     <string name="stays_put">Stays put</string>
     <string name="moves_down">Moves down</string>
     <string name="align_left">Left</string>
@@ -272,4 +286,5 @@
         <item quantity="one">%d key</item>
         <item quantity="other">%d keys</item>
     </plurals>
+    <string name="fire_os_no_input">Fire TV didn\'t let Plume switch to this input. Hold Home and pick Inputs.</string>
 </resources>

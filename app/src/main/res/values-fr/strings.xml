@@ -47,7 +47,9 @@
     <string name="done">Terminé</string>
     <string name="edit_apps_row">Modifier la ligne d\'applis</string>
     <string name="theme">Thème</string>
-    <string name="photo_fade">Fondu des photos</string>
+    <string name="fade_top">Fondu en haut</string>
+    <string name="fade_bottom">Fondu en bas</string>
+    <string name="glass">Verre dépoli</string>
     <string name="sort_apps">Trier les applis</string>
     <string name="manual">Manuel</string>
     <string name="most_used">Les plus utilisées</string>
@@ -152,7 +154,7 @@
     <!-- Fenêtres de configuration du bouton Accueil -->
     <string name="setup_home">Configurer le bouton Accueil</string>
     <string name="preview_home_setup">Aperçu des fenêtres de configuration Accueil</string>
-    <string name="setup_step">Étape %1$d sur 3</string>
+    <string name="setup_step">Étape %1$d sur %2$d</string>
     <string name="setup_role_title">Faire de Plume votre écran d\'accueil</string>
     <string name="setup_role_body">Android va demander quelle appli utiliser comme écran d\'accueil. Choisissez Plume.</string>
     <string name="setup_test_title">Appuyez sur Accueil sur votre télécommande</string>
@@ -169,6 +171,10 @@
     <string name="setup_not_now">Plus tard</string>
     <string name="setup_skip_check">Passer cette vérification</string>
     <string name="setup_open_accessibility">Ouvrir l\'accessibilité</string>
+    <string name="setup_restricted_title">Autoriser le bouton Accueil de Plume</string>
+    <string name="setup_restricted_body">Cette TV grise l\'interrupteur pour les applis installées hors du Play Store. Dans Infos sur l\'appli, sélectionnez \"Autoriser les paramètres restreints\". Sur certaines TV, c\'est dans le menu ⋮. Puis appuyez sur Retour pour revenir ici.</string>
+    <string name="setup_open_app_info">Ouvrir Infos sur l\'appli</string>
+    <string name="setup_no_menu">Je ne le trouve pas</string>
     <string name="setup_try_again">Réessayer</string>
     <string name="setup_close">Fermer</string>
     <string name="setup_done">Terminé</string>
@@ -230,4 +236,5 @@
     <string name="watch_next">À suivre (Android TV)</string>
     <string name="bottom_row">Rangée du bas</string>
     <string name="automatic">Automatique</string>
+    <string name="fire_os_no_input">Fire TV n\'a pas laissé Plume changer d\'entrée. Maintenez Accueil et choisissez Entrées.</string>
 </resources>

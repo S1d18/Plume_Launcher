@@ -47,7 +47,8 @@
     <string name="done">تم</string>
     <string name="edit_apps_row">تعديل صف التطبيقات</string>
     <string name="theme">المظهر</string>
-    <string name="photo_fade">تلاشي الصور</string>
+    <string name="fade_top">التلاشي العلوي</string>
+    <string name="fade_bottom">التلاشي السفلي</string>
     <string name="sort_apps">ترتيب التطبيقات</string>
     <string name="manual">يدوي</string>
     <string name="most_used">الأكثر استخدامًا</string>
@@ -151,7 +152,7 @@
     <!-- Home setup popups -->
     <string name="setup_home">إعداد زر الرئيسية</string>
     <string name="preview_home_setup">معاينة نوافذ إعداد الرئيسية</string>
-    <string name="setup_step">الخطوة %1$d من 3</string>
+    <string name="setup_step">الخطوة %1$d من %2$d</string>
     <string name="setup_role_title">اجعل Plume شاشتك الرئيسية</string>
     <string name="setup_role_body">سيسألك Android عن التطبيق الذي تريده شاشةً رئيسية. اختر Plume.</string>
     <string name="setup_test_title">اضغط زر الرئيسية في جهاز التحكم</string>
@@ -168,6 +169,10 @@
     <string name="setup_not_now">ليس الآن</string>
     <string name="setup_skip_check">تخطي هذا التحقق</string>
     <string name="setup_open_accessibility">فتح تسهيل الاستخدام</string>
+    <string name="setup_restricted_title">السماح بزر الصفحة الرئيسية في Plume</string>
+    <string name="setup_restricted_body">يعطّل هذا التلفزيون المفتاح للتطبيقات المثبّتة من خارج متجر Play. في معلومات التطبيق، اختر \"السماح بالإعدادات المقيّدة\". في بعض أجهزة التلفزيون يكون ضمن القائمة ⋮. ثم اضغط رجوع للعودة إلى هنا.</string>
+    <string name="setup_open_app_info">فتح معلومات التطبيق</string>
+    <string name="setup_no_menu">لا أجده</string>
     <string name="setup_try_again">إعادة المحاولة</string>
     <string name="setup_close">إغلاق</string>
     <string name="setup_done">تم</string>
@@ -195,4 +200,5 @@
     <string name="input_added">أُضيف إلى الصف.</string>
     <string name="input_removed">أُزيل من الصف.</string>
     <string name="sources_hint">اضغط مطوّلًا على OK لتثبيت مدخل في الصف.</string>
+    <string name="fire_os_no_input">لم يسمح Fire TV لـ Plume بالتبديل إلى هذا المدخل. اضغط مطولًا على زر الرئيسية واختر مصادر الإدخال.</string>
 </resources>

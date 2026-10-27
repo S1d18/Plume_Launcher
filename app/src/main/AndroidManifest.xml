@@ -28,12 +28,15 @@
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
         </intent>
+        <package android:name="com.google.android.apps.tv.launcherx" />
+        <!-- Fire OS's input switch, for the HDMI tiles (Remap.openInput) -->
+        <package android:name="com.amazon.tv.inputpreference.service" />
     </queries>
 
     <application
         android:label="Plume"
         android:banner="@drawable/banner"
-        android:icon="@drawable/banner"
+        android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
         android:theme="@android:style/Theme.DeviceDefault.NoActionBar">
 
@@ -55,6 +58,17 @@
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- For launchers that list only LAUNCHER apps. -->
+        <activity-alias
+            android:name=".LauncherEntry"
+            android:targetActivity=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
 
         <!-- Back to the home screen after an update (Android kills the old version, which uncovers the last app). -->
         <receiver android:name=".Updated" android:exported="false">

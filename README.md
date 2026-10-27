@@ -31,7 +31,7 @@ Plume replaces the cluttered stock home screen with the two things you actually 
 - **Clean apps row.** Monochrome logos (or the same logos in brand colour, or each app's own banner) in a single row, with names on focus, always or never. Rearrange it by holding OK, sort by most used, or hide apps you don't use (they stay in All apps). An optional PIN locks the layout so small hands can't rearrange it.
 - **Sources list.** The Sources icon in the top bar opens the list of the TV inputs. A console or set-top box that names itself over HDMI-CEC (for example "PlayStation 5") shows with its logo, and selecting it switches the TV to that input. A port with no signal says so. Hold OK on an input to put it in the apps row, and again to take it out.
 - **Remote keys.** Change what a button on your remote does, for example the TV, Netflix or Settings button. A key can do one thing on a press and another when you hold it. See [Remote keys](#remote-keys).
-- **Light, dark or automatic theme**, each with its own wallpaper. Auto follows sunrise and sunset where you are (from 7:00 to 19:00 until Plume knows your location). Add your own photos from your phone by scanning a QR code, or show a folder of photos from the TV or a USB drive that changes on a timer.
+- **Light, dark or automatic theme**, each with its own wallpaper. Auto follows sunrise and sunset where you are (from 7:00 to 19:00 until Plume has a location; it keeps that location if you turn the weather off later). Add your own photos from your phone by scanning a QR code, or show a folder of photos from the TV or a USB drive that changes on a timer.
 - **Optional Gallery screensaver.** Public-domain landscape paintings in 16:9, downloaded only if you choose it, or a folder of your own photos.
 - **Optional weather** under the clock.
 - **Updates itself.** Plume checks GitHub once a day and installs new versions from its settings (from 1.2 on). The first update asks you to allow installs from Plume.
@@ -63,7 +63,7 @@ Measured on a Hisense Google TV (Android 12, 1.8 GB RAM):
 
 ### First-run setup
 
-Until both are on, Plume settings shows a **Finish setup** card at the top. Both rows are also under **Plume settings → Remote & Home button**:
+Until one of them is on, Plume settings shows a **Finish setup** card at the top. Both rows are also under **Plume settings → Remote & Home button**:
 
 | Setting | What to do |
 |---|---|
@@ -71,6 +71,9 @@ Until both are on, Plume settings shows a **Finish setup** card at the top. Both
 | **Default launcher** | Press OK and choose **Plume** in the dialog. |
 
 Allow the **TV listings** permission when asked; Continue Watching needs it.
+
+> [!NOTE]
+> **Holding Volume moves one step?** Many TVs act on the volume keys before any accessibility service sees them, so with the Home button on, a held Volume key changes the volume only once. Turn on **Plume settings → Remote & Home button → Smooth volume** to get the normal hold back. In exchange, Home shows Google TV for about a second before Plume opens, and Smooth volume stays off while any **Remote keys** are set.
 
 > [!NOTE]
 > Android shows the same generic warning for every accessibility service. Plume's service listens for the Home key, for the keys you set under **Remote keys** and for the system launcher appearing. It cannot read screen content.
@@ -132,7 +135,7 @@ Android 13 and newer grey out the Accessibility switch for apps installed outsid
 - open **Android settings** or **Network settings**
 - **Do nothing**
 
-Back, OK, the arrows, Home, Power and the volume keys can't be changed, so the remote can't be locked out and keeps its volume. A key you set stops doing its usual job. **Remove this key** gives it back. The keys work through the Home button service, so **Plume: Home button** must be on in Accessibility settings.
+Back, OK, the arrows, Home, Power and the volume keys can't be changed, so the remote can't be locked out. While any key is set, **Smooth volume** is off. A key you set stops doing its usual job. **Remove this key** gives it back. The keys work through the Home button service, so **Plume: Home button** must be on in Accessibility settings.
 
 ### Custom wallpapers
 
@@ -167,7 +170,7 @@ Plume has no analytics, no ads and no account. It only connects to the internet 
 - check this repository's GitHub releases for a new version, once a day, and download it when you choose to update
 - download the Gallery paintings from this repository, **only if you choose that screensaver**
 - get the Bing picture of the day (about 300 KB), **only if you choose it as your wallpaper**. Plume sends a request to [bing.com](https://www.bing.com) when the home screen opens: once a day, or once an hour until the picture has changed that day, because Bing changes it at a set time for each country. Bing sees the TV's IP address and its language and country, which Plume sends to get the picture for your country. Plume keeps one picture and deletes it when you choose another wallpaper.
-- fetch the weather, **only if you turn it on**. It looks up your approximate location from your IP address via [ipwho.is](https://ipwho.is), then gets the forecast from [Open-Meteo](https://open-meteo.com). The Auto theme uses the same location to work out sunrise and sunset on the TV, with no extra request.
+- fetch the weather, **only if you turn it on**. It looks up your approximate location from your IP address via [ipwho.is](https://ipwho.is), then gets the forecast from [Open-Meteo](https://open-meteo.com). The Auto theme uses the same location to work out sunrise and sunset on the TV, with no extra request. Plume keeps the location on the TV after you turn the weather off, so Auto still follows the sun; clearing Plume's data removes it.
 
 **Add from phone…** runs a small upload page on the TV itself, reachable only on your home network and only while that screen is open. Photos go straight from your phone to the TV and nowhere else.
 
@@ -216,7 +219,7 @@ Bug reports, design ideas, translations and pull requests are welcome. Plume sta
   - Martin Johnson Heade: *Thunder Storm on Narragansett Bay*
 - **Wallpapers:** "Canada" by Thomas Curryer, via [Unsplash](https://unsplash.com/@tawc20) (CC0)
 - **App logos:** [Simple Icons](https://simpleicons.org) (CC0). All trademarks belong to their respective owners.
-- **HDMI input icons:** [Material Symbols](https://fonts.google.com/icons) by Google (Apache 2.0)
+- **HDMI input and settings icons:** [Material Symbols](https://fonts.google.com/icons) by Google (Apache 2.0)
 
 ## License
 

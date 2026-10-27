@@ -47,7 +47,8 @@
     <string name="done">Bitti</string>
     <string name="edit_apps_row">Uygulama satırını düzenle</string>
     <string name="theme">Tema</string>
-    <string name="photo_fade">Fotoğraf geçişi</string>
+    <string name="fade_top">Üst geçiş</string>
+    <string name="fade_bottom">Alt geçiş</string>
     <string name="sort_apps">Uygulamaları sırala</string>
     <string name="manual">Manuel</string>
     <string name="most_used">En çok kullanılanlar</string>
@@ -144,7 +145,7 @@
     <string name="season_episode">S%1$s B%2$s</string>
     <string name="setup_home">Ana Ekran tuşunu ayarla</string>
     <string name="preview_home_setup">Ana Ekran kurulum pencerelerini önizle</string>
-    <string name="setup_step">%1$d / 3. Adım</string>
+    <string name="setup_step">%1$d / %2$d. Adım</string>
     <string name="setup_role_title">Plume\'u ana ekranınız yapın</string>
     <string name="setup_role_body">Android hangi uygulamanın ana ekran olacağını soracak. Plume\'u seçin.</string>
     <string name="setup_test_title">Kumandanızdaki Ana Ekran tuşuna basın</string>
@@ -161,6 +162,10 @@
     <string name="setup_not_now">Şimdi Değil</string>
     <string name="setup_skip_check">Bu kontrolü atla</string>
     <string name="setup_open_accessibility">Erişilebilirliği Aç</string>
+    <string name="setup_restricted_title">Plume\'un Ana Ekran tuşuna izin verin</string>
+    <string name="setup_restricted_body">Bu TV, Play Store dışından yüklenen uygulamalar için anahtarı devre dışı bırakır. Uygulama bilgilerinde \"Kısıtlanmış ayarlara izin ver\"i seçin. Bazı TV\'lerde ⋮ menüsündedir. Ardından buraya dönmek için Geri\'ye basın.</string>
+    <string name="setup_open_app_info">Uygulama bilgilerini aç</string>
+    <string name="setup_no_menu">Bulamıyorum</string>
     <string name="setup_try_again">Tekrar dene</string>
     <string name="setup_close">Kapat</string>
     <string name="setup_done">Tamam</string>
@@ -187,4 +192,5 @@
     <string name="input_added">Satıra eklendi.</string>
     <string name="input_removed">Satırdan kaldırıldı.</string>
     <string name="sources_hint">Bir girişi satıra sabitlemek için OK tuşunu basılı tutun.</string>
+    <string name="fire_os_no_input">Fire TV, Plume\'un bu girişe geçmesine izin vermedi. Ana Ekran tuşunu basılı tutup Girişler\'i seçin.</string>
 </resources>
