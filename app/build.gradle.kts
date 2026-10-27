@@ -29,6 +29,13 @@ android {
         resValues = true
     }
 
+    // CI fails on new lint errors only; the ones already here are listed in lint-baseline.xml
+    // (./gradlew updateLintBaseline rewrites it). Translations have their own check, so lag there isn't an error.
+    lint {
+        baseline = file("lint-baseline.xml")
+        disable += setOf("MissingTranslation", "ExtraTranslation")
+    }
+
     // Release key lives outside the repo; keystore.properties (git-ignored) points at it. Without that file
     // (a fresh clone) release builds fall back to the debug key, so anyone can still build and sideload.
     val keys = rootProject.file("keystore.properties").takeIf { it.exists() }
