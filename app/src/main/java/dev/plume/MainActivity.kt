@@ -63,6 +63,7 @@ import android.text.SpannableString
 import android.text.TextUtils
 import android.text.format.DateFormat
 import android.text.style.BulletSpan
+import android.text.style.StyleSpan
 import android.util.LruCache
 import android.view.Gravity
 import android.view.KeyEvent
@@ -211,7 +212,7 @@ internal fun iconStyleOf(stored: String?, oldColour: Boolean) =
 /** Allowed to start an activity from the background because the Home button service is bound. */
 class Updated : BroadcastReceiver() {
     override fun onReceive(c: Context, i: Intent) {
-        c.startActivity(Intent(c, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        c.startActivity(Intent(c, MainActivity::class.java).setAction(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
     }
 }
 
@@ -717,7 +718,8 @@ class MainActivity : Activity() {
     }
 
     /**
-     * Once after an update: the first three CHANGELOG.md lines of this version, so put the best ones first.
+     * Once after an update: the first four CHANGELOG.md entries of this version, so put the best ones first.
+     * The card shows each entry's bold headline and the sentence after it; See all changes shows the rest.
      * Closing it counts as reading the notes, which clears the dot on the Plume settings icon.
      */
     private fun whatsNewCard() {
@@ -725,9 +727,11 @@ class MainActivity : Activity() {
         updateBadge()
         val notes = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            getString(R.string.whats_new).split('\n').take(3).forEach {
+            getString(R.string.whats_new).split('\n').filter { !it.startsWith("#") }.take(4).forEach {
+                val head = it.indexOf("**", 2)
+                val cut = if (head < 0) -1 else it.indexOf(". ", head + 2)
                 addView(label("", 15f).apply {
-                    text = SpannableString(it).apply { setSpan(BulletSpan(dp(10), fg), 0, it.length, 0) }
+                    text = noteText(if (cut < 0) it else it.substring(0, cut + 1))
                     maxLines = Int.MAX_VALUE
                     ellipsize = null
                     setLineSpacing(0f, 1.15f)
@@ -948,8 +952,8 @@ class MainActivity : Activity() {
     private fun currentWallpaper(forDark: Boolean = dark) =
         prefs.getString(if (forDark) "wp_dark" else "wp_light", null) ?: defaultWallpaper(forDark)
 
-    /** Glass: the tiles are see-through over a blur of the wallpaper (a setting, off by default). */
-    private fun glassOn() = prefs.getBoolean("glass", false)
+    /** Glass: the tiles are see-through over a blur of the wallpaper (a setting, on by default since 1.6). */
+    private fun glassOn() = prefs.getBoolean("glass", true)
 
     /** Glass needs a picture to blur: with a plain background the tiles stay as they are. */
     private fun glassActive() = glassOn() && !currentWallpaper().startsWith("plain:")
@@ -3105,8 +3109,15 @@ class MainActivity : Activity() {
         ), back = { renderSettings(R.string.updates) })
         // Focusable, lit on focus, so Down walks through notes longer than the panel and it scrolls along.
         getString(R.string.whats_new).split('\n').forEach {
+            if (it.startsWith("#")) {
+                settingsList.addView(label(it.substring(1), 13f).apply {
+                    setTypeface(typeface, Typeface.BOLD)
+                    setPadding(dp(14), dp(18), dp(14), dp(2))
+                })
+                return@forEach
+            }
             settingsList.addView(label("", 13f).apply {
-                text = SpannableString(it).apply { setSpan(BulletSpan(dp(10), fg), 0, it.length, 0) }
+                text = noteText(it)
                 maxLines = Int.MAX_VALUE
                 ellipsize = null
                 alpha = 0.7f
@@ -3117,6 +3128,19 @@ class MainActivity : Activity() {
         }
         settingsList.getChildAt(0).nextFocusDownId = View.NO_ID // showPage stops Down at its last row
         settingsList.getChildAt(settingsList.childCount - 1).let { it.id = View.generateViewId(); it.nextFocusDownId = it.id }
+    }
+
+    /** A What's new entry with a bullet, its **marked** words bold and the marks removed. */
+    private fun noteText(entry: String): SpannableString {
+        val parts = entry.split("**")
+        val s = SpannableString(parts.joinToString(""))
+        var at = 0
+        parts.forEachIndexed { i, part ->
+            if (i % 2 == 1) s.setSpan(StyleSpan(Typeface.BOLD), at, at + part.length, 0)
+            at += part.length
+        }
+        s.setSpan(BulletSpan(dp(10), fg), 0, s.length, 0)
+        return s
     }
 
     /** Notes the user hasn't opened since updating. A fresh install has nothing new to tell. */
