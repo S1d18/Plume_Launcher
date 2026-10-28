@@ -33,6 +33,11 @@ class HomeWatchTest {
         assertEquals(HomeWatch.SETTINGS_WAIT_MS, w.opened(amazon, amazonHome, 4_000))
     }
 
+    @Test fun yandexHomeIsCoveredButNotItsOtherScreens() {
+        assertEquals(0L, HomeWatch().opened("com.yandex.tv.home", "com.yandex.tv.home.HomeActivity", 1_000))
+        assertNull(HomeWatch().opened("com.yandex.tv.home", "com.yandex.tv.home.search.SearchActivity", 1_000))
+    }
+
     @Test fun olderFireLauncher() {
         assertEquals(0L, HomeWatch().opened("com.amazon.firelauncher", "com.amazon.firelauncher.Launcher", 1_000))
     }

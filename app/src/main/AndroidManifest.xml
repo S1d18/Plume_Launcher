@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- In-app updates from GitHub releases. -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <!-- Uninstall an app from its hold menu. -->
@@ -74,6 +75,16 @@
         <receiver android:name=".Updated" android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Yandex TV: come to the front after boot and put the Home service back (see Boot). -->
+        <receiver android:name=".Boot" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="dev.plume.RESTORE_HOME_SERVICE" />
+                <action android:name="dev.plume.SHOW_HOME" />
             </intent-filter>
         </receiver>
 

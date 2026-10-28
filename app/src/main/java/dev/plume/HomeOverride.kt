@@ -20,6 +20,7 @@ class HomeOverride : AccessibilityService() {
     override fun onServiceConnected() {
         running = this
         applyKeyFilter()
+        if (Boot.justBooted()) goHome() // the system binds us at boot, after Yandex TV already showed its launcher
     }
 
     /**
@@ -40,6 +41,7 @@ class HomeOverride : AccessibilityService() {
         running = null
         handler.removeCallbacks(jump)
         getSharedPreferences("home", MODE_PRIVATE).edit().putBoolean("home_off", true).apply()
+        Boot.scheduleRestore(this) // Yandex TV's firmware switches it off on its own
         return super.onUnbind(intent)
     }
 

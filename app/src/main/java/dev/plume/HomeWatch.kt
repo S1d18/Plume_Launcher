@@ -25,6 +25,7 @@ class HomeWatch {
         GOOGLE_TV -> cls?.contains("dashboard", ignoreCase = true) != true // holding Home opens the dashboard
         AMAZON -> cls?.startsWith("$AMAZON.ui.HomeActivity") == true // HomeActivity_vNext on current builds
         OLD_AMAZON -> cls == "$OLD_AMAZON.Launcher"
+        YANDEX -> cls == "$YANDEX.HomeActivity" // its other screens (search, settings) stay
         else -> false
     }
 
@@ -33,6 +34,7 @@ class HomeWatch {
         const val GOOGLE_TV = "com.google.android.apps.tv.launcherx"
         private const val AMAZON = "com.amazon.tv.launcher"
         private const val OLD_AMAZON = "com.amazon.firelauncher"
+        private const val YANDEX = "com.yandex.tv.home"
         private const val AMAZON_SETTINGS = "com.amazon.tv.settings"
         private const val JUMP_GAP_MS = 600L
         const val SETTINGS_WAIT_MS = 550L

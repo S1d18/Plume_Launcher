@@ -484,7 +484,7 @@ class MainActivity : Activity() {
 
     /** Off hands Home back to the TV's own launcher, and Plume leaves it off until switched on again. */
     private fun turnOffHomeButton() {
-        prefs.edit().putBoolean("home_off", true).apply()
+        prefs.edit().putBoolean("home_off", true).putBoolean(Boot.USER_OFF, true).apply()
         HomeOverride.running?.disableSelf()
         if (homeServiceOn() && checkSelfPermission(WRITE_SECURE) == PackageManager.PERMISSION_GRANTED) {
             val me = ComponentName(this, HomeOverride::class.java)
@@ -501,7 +501,7 @@ class MainActivity : Activity() {
 
     /** The Home key service is an accessibility service, which Android only lets the user switch on. */
     private fun turnOnHomeButton() {
-        prefs.edit().remove("home_off").apply()
+        prefs.edit().remove("home_off").remove(Boot.USER_OFF).apply()
         ensureHomeService() // works where the adb permission was granted
         if (homeServiceOn()) return renderSettings(R.string.home_button)
         // The written path is the safety net: some Google TVs (a Xiaomi stick) answer the Accessibility link
@@ -604,7 +604,7 @@ class MainActivity : Activity() {
     private fun serviceStillOff() = if (sdk() >= 33 && !restrictedTried) restrictedPopup() else adbPopup()
 
     private fun tryHomeService() {
-        prefs.edit().remove("home_off").apply()
+        prefs.edit().remove("home_off").remove(Boot.USER_OFF).apply()
         ensureHomeService() // works where the adb permission was granted
         if (homeServiceOn()) testPopup(2) else servicePopup()
     }
