@@ -21,6 +21,20 @@
   <img src="docs/home-dark.jpg" alt="Plume home screen, dark theme" width="49%">
 </p>
 
+> [!NOTE]
+> **This is a fork with fixes for Yandex TV (Яндекс ТВ).** Branch `yandex-tv`, based on Plume 1.6. Upstream: [aradhyas8/Plume_Launcher](https://github.com/aradhyas8/Plume_Launcher).
+>
+> **Tested on:** Hyundai H-LED43FS5001 (43", CVTE chassis, HiSilicon `hisi351`, 1 GB RAM, armv7), Android 9, Yandex TV firmware `release-1.6.2` (build 1832107156, 2023-07-14), Yandex launcher `com.yandex.tv.home` 3.355.18.
+>
+> What changes, and why:
+> - **Plume comes to the front after a cold start.** Yandex's launcher is direct-boot aware, so the TV always boots into it, and this firmware doesn't deliver `BOOT_COMPLETED` to third-party apps. Plume uses the clock being set (`TIME_SET`) and its Home service being bound, within 3 minutes of boot, and shows itself again 10 seconds later.
+> - **The Home service is put back** when the firmware switches it off (it clears the enabled accessibility services soon after boot). Plume's own Home switch is still respected; at most 3 restores per 10 minutes.
+> - **Yandex's home screen is covered** like Google TV's (`com.yandex.tv.home/.HomeActivity` only).
+>
+> Setup over ADB: `adb install`, then `adb shell pm grant dev.plume android.permission.WRITE_SECURE_SETTINGS` and `adb shell cmd package set-home-activity dev.plume/.MainActivity`. Yandex's launcher stays installed and enabled: TV inputs, live TV and Alice keep working. APKs here are signed with a different key than upstream's, so switching between them needs an uninstall first.
+>
+> **Форк для Яндекс ТВ.** Проверено на Hyundai H-LED43FS5001, Android 9, прошивка Яндекс ТВ `release-1.6.2`: после перезагрузки сразу открывается Plume, кнопка «Домой» ведёт в него, входы HDMI и Алиса работают. Лаунчер Яндекса не отключается.
+
 Plume replaces the cluttered stock home screen with the two things you actually use: your apps and what you were watching. There are no ads, no sponsored rows, no account and no tracking, and it stays out of the way of the apps it launches.
 
 ## Highlights
